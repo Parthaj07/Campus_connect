@@ -7,19 +7,33 @@ and administrative panel. A student can easily check and edit his or her profile
 Available Features:
 
 Staff Panel
+
 Student Panel
+
 Admin Panel
+
 Manage Course, Subject, Session
+
 Student Management
+
 Staff/Teacher Management
+
 Student Attendance Management
+
 Update User Profile
+
 Exam Result Management
+
 Send Notifications
+
 View Notifications
+
 Present and Absent Percentage
+
 Student Leave Management
+
 Staff Leave Management
+
 Send Feedback
 
 Technologies Used:	Python with Django Web Framework
