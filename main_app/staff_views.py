@@ -169,14 +169,13 @@ def staff_apply_leave(request):
 
 
 def staff_feedback(request):
-    form = FeedbackStaffForm(request.POST or None)
-    staff = get_object_or_404(Staff, admin_id=request.user.id)
-    context = {
-        'form': form,
-        'feedbacks': FeedbackStaff.objects.filter(staff=staff),
-        'page_title': 'Add Feedback'
-    }
+    template_name = "staff_template/staff_feedback.html"
+    form_class = FeedbackStaffForm
+    page_title = "Add Feedback"
+    
     if request.method == 'POST':
+        form = form_class(request.POST)
+        staff = get_object_or_404(Staff, admin_id=request.user.id)
         if form.is_valid():
             try:
                 obj = form.save(commit=False)
@@ -188,7 +187,18 @@ def staff_feedback(request):
                 messages.error(request, "Could not Submit!")
         else:
             messages.error(request, "Form has errors!")
-    return render(request, "staff_template/staff_feedback.html", context)
+    else:
+        form = form_class()
+        staff = get_object_or_404(Staff, admin_id=request.user.id)
+    
+    feedbacks = FeedbackStaff.objects.filter(staff=staff)
+    context = {
+        'form': form,
+        'feedbacks': feedbacks,
+        'page_title': page_title
+    }
+    
+    return render(request, template_name, context)
 
 
 def staff_view_profile(request):
